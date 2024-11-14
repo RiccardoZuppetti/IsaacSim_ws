@@ -32,16 +32,16 @@ class H1ReachEnvCfg(ReachEnvCfg):
         # override events
         self.events.reset_robot_joints.params["position_range"] = (0.75, 1.25)
         # override rewards
-        self.rewards.end_effector_position_tracking.params["asset_cfg"].body_names = [".*_elbow"]
-        self.rewards.end_effector_position_tracking_fine_grained.params["asset_cfg"].body_names = [".*_elbow"]
-        self.rewards.end_effector_orientation_tracking.params["asset_cfg"].body_names = [".*_elbow"]
+        self.rewards.end_effector_position_tracking.params["asset_cfg"].body_names = [".*_elbow_link"]
+        self.rewards.end_effector_position_tracking_fine_grained.params["asset_cfg"].body_names = [".*_elbow_link"]
+        self.rewards.end_effector_orientation_tracking.params["asset_cfg"].body_names = [".*_elbow_link"]
         # override actions
         self.actions.arm_action = mdp.JointPositionActionCfg(
-            asset_name="robot", joint_names=[".*_shoulder_.*", ".*_elbow"], scale=0.5, use_default_offset=True
+            asset_name="robot", joint_names=[".*_shoulder_.*", ".*_elbow_link"], scale=0.5, use_default_offset=True
         )
         # override command generator body
         # end-effector is along x-direction
-        self.commands.ee_pose.body_name = ".*_elbow"
+        self.commands.ee_pose.body_name = ".*_elbow_link"
         self.commands.ee_pose.ranges.pitch = (math.pi / 2, math.pi / 2)
 
 
